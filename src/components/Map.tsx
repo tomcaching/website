@@ -8,7 +8,7 @@ const position = {
   lng: 15.04,
 };
 
-const Map: FC = () => {
+export const Map: FC = () => {
   return (
     <MapContainer
       center={position}
