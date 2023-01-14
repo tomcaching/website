@@ -12,37 +12,7 @@ const Map = dynamic(() => import("@/components/Map"), {
   });
 
 // TODO: Fetch this from the API
-const caches: Array<Cache> = [
-  {
-    id: 1,
-    type: "traditional",
-    coordinates: {
-      lat: 50.7746878,
-      lng: 15.0481814
-    },
-    fakeCoordinates: null,
-    title: "Klasická keška doma",
-    content: "Tohle bude \n#markdown popis\n**kurzíva**",
-    found: false,
-    locked: false,
-  },
-  {
-    id: 2,
-    type: "mystery",
-    coordinates: {
-      lat: 50.776210010686995,
-      lng: 15.050094620893406
-    },
-    fakeCoordinates: {
-      lat: 50.77440713128637,
-      lng: 15.048651308781785
-    },
-    title: "Mysterka",
-    content: "Vypadá to, že je na hřišti u baráku, ale ve skutečnosti je na velkým fotbalu",
-    locked: true,
-    found: false
-  }
-]
+const caches: Array<Cache> = []
 
 export default function Home() {
   const [selectedCache, setSelectedCache] = useState<Cache | null>(null);

@@ -19,7 +19,6 @@ const CacheMarker: FC<CacheMarkerProps> = ({
   cache,
   onSelect,
 }: CacheMarkerProps) => {
-  const position = cache.locked ? cache.fakeCoordinates : cache.coordinates;
   const cacheIcon = icon({
     iconUrl: `/static/caches/${cache.found ? "smiley" : cache.type}.png`,
     iconAnchor: new Point(12, 12),
@@ -29,7 +28,7 @@ const CacheMarker: FC<CacheMarkerProps> = ({
   return (
     <Marker
       key={cache.id}
-      position={position}
+      position={cache.coordinates}
       icon={cacheIcon}
       eventHandlers={{ click: () => onSelect() }}
     />
