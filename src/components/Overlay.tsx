@@ -16,14 +16,14 @@ export const Overlay: FC<OverlayProps> = ({ visible, children, onClose }) => {
   return (
     <>
       <div
-        className={`fixed z-[10000] w-screen h-screen bg-geocaching-green bg-opacity-30 backdrop-brightness-50 transition-all duration-700 ${backgroundVisibilityClass}`}
+        className={`fixed z-[10000] w-screen h-screen bg-geocaching-green bg-opacity-30 backdrop-brightness-50 transition-all ${backgroundVisibilityClass}`}
         onClick={() => onClose && onClose()}
       ></div>
       <div
-        className={`fixed z-[10001] w-[80%] md:w-1/2 xl:w-1/4 h-screen right-0 transition-all duration-700`}
+        className={`fixed z-[10001] w-[80%] md:w-1/2 xl:w-1/4 h-screen right-0 transition-all`}
       >
         <div
-          className={`absolute w-full h-screen bg-white shadow-2xl transition-all duration-700 ${foregroundVisibilityClass}`}
+          className={`absolute w-full h-screen bg-white shadow-2xl transition-all ${foregroundVisibilityClass}`}
           onClick={(event) => event.preventDefault()}
         >
           <div className="p-8">
