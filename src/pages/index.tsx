@@ -4,11 +4,45 @@ import { Overlay } from "@/components/Overlay";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useState } from "react";
+import { type Cache } from "@/types";
 
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
+// TODO: Fetch this from the API
+const caches: Array<Cache> = [
+  {
+    id: 1,
+    type: "traditional",
+    coordinates: {
+      lat: 50.7746878,
+      lng: 15.0481814
+    },
+    fakeCoordinates: null,
+    title: "Klasická keška doma",
+    content: "Tohle bude \n#markdown popis\n**kurzíva**",
+    found: false,
+    locked: false,
+  },
+  {
+    id: 2,
+    type: "mystery",
+    coordinates: {
+      lat: 50.776210010686995,
+      lng: 15.050094620893406
+    },
+    fakeCoordinates: {
+      lat: 50.77440713128637,
+      lng: 15.048651308781785
+    },
+    title: "Mysterka",
+    content: "Vypadá to, že je na hřišti u baráku, ale ve skutečnosti je na velkým fotbalu",
+    locked: true,
+    found: false
+  }
+]
+
 export default function Home() {
-  const [selectedCache, setSelectedCache] = useState<string | null>(null);
+  const [selectedCache, setSelectedCache] = useState<Cache | null>(null);
 
   return (
     <>
@@ -20,21 +54,12 @@ export default function Home() {
       </Head>
       <div className="flex flex-col min-h-screen">
         <Header/>
-        <button onClick={() => setSelectedCache("something")}>Show cache overlay</button>
-        <Map />
+        <Map caches={caches} onCacheSelected={(cache) => setSelectedCache(cache)}/>
         <Footer />
         <Overlay visible={selectedCache !== null} onClose={() => setSelectedCache(null)}>
-          <h1 className="text-geocaching-green font-black text-3xl">Tady bude název kešky</h1>
-          <p>
-            A nějaký povídání
-            <br/>
-            bla
-            <br/>
-            bla
-            <br/>
-            bla
-            <br/>
-            bla
+          <h1 className="text-geocaching-green font-black text-3xl">{selectedCache?.title}</h1>
+          <p className="mt-4">
+            {selectedCache?.content}
           </p>
         </Overlay>
       </div>
