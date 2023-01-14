@@ -1,4 +1,4 @@
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 import { type FC } from "react";
 import { type Cache } from "@/types";
 import "leaflet/dist/leaflet.css";
@@ -31,7 +31,9 @@ const CacheMarker: FC<CacheMarkerProps> = ({
       position={cache.coordinates}
       icon={cacheIcon}
       eventHandlers={{ click: () => onSelect() }}
-    />
+    >
+      <Tooltip content={cache.title} direction="top"></Tooltip>
+    </Marker>
   );
 };
 
