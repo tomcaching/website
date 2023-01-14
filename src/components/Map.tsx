@@ -13,7 +13,6 @@ const Map: FC = () => {
     <MapContainer
       center={position}
       zoom={zoom}
-      scrollWheelZoom={false}
       className="flex-grow"
     >
       <TileLayer
