@@ -6,7 +6,10 @@ import Head from "next/head";
 import { useState } from "react";
 import { type Cache } from "@/types";
 
-const Map = dynamic(() => import("@/components/Map"), { ssr: false });
+const Map = dynamic(() => import("@/components/Map"), {
+   ssr: false,
+   loading: () => <div className="bg-geocaching-brown-gray flex-grow"/>
+  });
 
 // TODO: Fetch this from the API
 const caches: Array<Cache> = [
@@ -58,7 +61,7 @@ export default function Home() {
         <Footer />
         <Overlay visible={selectedCache !== null} onClose={() => setSelectedCache(null)}>
           <h1 className="text-geocaching-green font-black text-3xl">{selectedCache?.title}</h1>
-          <p className="mt-4">
+          <p className="mt4">
             {selectedCache?.content}
           </p>
         </Overlay>
