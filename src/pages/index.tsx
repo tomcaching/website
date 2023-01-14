@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Overlay } from "@/components/Overlay";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type Cache } from "@/types";
 
 const Map = dynamic(() => import("@/components/Map"), {
@@ -11,11 +11,16 @@ const Map = dynamic(() => import("@/components/Map"), {
    loading: () => <div className="bg-geocaching-brown-gray flex-grow"/>
   });
 
-// TODO: Fetch this from the API
-const caches: Array<Cache> = []
-
 export default function Home() {
+  const [caches, setCaches] = useState<Array<Cache>>([]);
   const [selectedCache, setSelectedCache] = useState<Cache | null>(null);
+
+  // TODO: Use react-query
+  useEffect(() => {
+    fetch("https://caches-api.onrender.com/api/caches")
+      .then(response => response.json())
+      .then(response => setCaches(response));
+  }, []);
 
   return (
     <>
