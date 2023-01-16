@@ -1,4 +1,4 @@
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 import { type FC } from "react";
 import { type Cache } from "@/types";
 import "leaflet/dist/leaflet.css";
@@ -19,7 +19,6 @@ const CacheMarker: FC<CacheMarkerProps> = ({
   cache,
   onSelect,
 }: CacheMarkerProps) => {
-  const position = cache.locked ? cache.fakeCoordinates : cache.coordinates;
   const cacheIcon = icon({
     iconUrl: `/static/caches/${cache.found ? "smiley" : cache.type}.png`,
     iconAnchor: new Point(12, 12),
@@ -29,10 +28,12 @@ const CacheMarker: FC<CacheMarkerProps> = ({
   return (
     <Marker
       key={cache.id}
-      position={position}
+      position={cache.coordinates}
       icon={cacheIcon}
       eventHandlers={{ click: () => onSelect() }}
-    />
+    >
+      <Tooltip content={cache.title} direction="top"></Tooltip>
+    </Marker>
   );
 };
 

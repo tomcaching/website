@@ -13,14 +13,14 @@ type Base = {
 
 type TraditionalCache = Base & {
   type: "traditional";
-  fakeCoordinates: null;
   locked: false;
+  question: null;
 };
 
 type MysteryCache = Base & {
   type: "mystery";
-  fakeCoordinates: CacheCoordinates;
   locked: boolean;
+  question: String;
 };
 
 export type Cache = TraditionalCache | MysteryCache;
