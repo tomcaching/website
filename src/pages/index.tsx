@@ -17,7 +17,7 @@ export default function Home() {
 
   // TODO: Use react-query
   useEffect(() => {
-    fetch("https://caches-api.onrender.com/api/caches")
+    fetch("https://api.tomcaching.fun/api/caches")
       .then(response => response.json())
       .then(response => setCaches(response));
   }, []);
