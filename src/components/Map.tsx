@@ -39,12 +39,13 @@ const CacheMarker: FC<CacheMarkerProps> = ({
 
 export type MapProps = {
   caches: Array<Cache>;
+  loading: boolean;
   onCacheSelected: (cache: Cache) => void;
 };
 
-export const Map: FC<MapProps> = ({ caches, onCacheSelected }) => {
+export const Map: FC<MapProps> = ({ caches, loading, onCacheSelected }) => {
   return (
-    <MapContainer center={position} zoom={zoom} className="flex-grow">
+    <MapContainer center={position} zoom={zoom} className="relative flex-grow">
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -59,6 +60,12 @@ export const Map: FC<MapProps> = ({ caches, onCacheSelected }) => {
           />
         ))}
       </>
+
+      {loading && (
+        <div className="absolute right-4 top-4 z-[10000] bg-white p-4 rounded-lg font-black text-geocaching-brown-darker shadow-lg">
+          Načítám kešky...
+        </div>
+      )}
     </MapContainer>
   );
 };
