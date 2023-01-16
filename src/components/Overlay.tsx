@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { FaArrowRight, FaSignOutAlt } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaMapMarkedAlt, FaSignOutAlt, FaTimes } from "react-icons/fa";
 
 export type OverlayProps = {
   visible: boolean;
@@ -8,34 +8,39 @@ export type OverlayProps = {
 };
 
 export const Overlay: FC<OverlayProps> = ({ visible, children, onClose }) => {
-  const foregroundVisibilityClass = visible ? "right-0" : "-right-full";
   const backgroundVisibilityClass = visible
     ? "opacity-1 pointer-events-auto"
     : "opacity-0 pointer-events-none";
 
+  const foregroundVisibilityClass = visible
+    ? "opacity-1 translate-y-0"
+    : "opacity-0 translate-y-24"
+
   return (
     <>
       <div
-        className={`fixed z-[10000] w-screen h-screen bg-geocaching-green bg-opacity-30 backdrop-brightness-50 transition-all ${backgroundVisibilityClass}`}
+        className={`${backgroundVisibilityClass} fixed z-[10000] w-screen h-screen bg-geocaching-green bg-opacity-10 backdrop-brightness-50 backdrop-blur-sm transition-all flex flex-col items-center justify-center`}
         onClick={() => onClose && onClose()}
-      ></div>
-      <div
-        className={`fixed z-[10001] w-[80%] md:w-1/2 xl:w-1/4 h-screen right-0 transition-all`}
       >
         <div
-          className={`absolute w-full h-screen bg-white shadow-2xl transition-all ${foregroundVisibilityClass}`}
-          onClick={(event) => event.preventDefault()}
+          className={`${foregroundVisibilityClass} z-[10001] w-full md:w-3/4 xl:w-1/2 h-screen transition-all duration-700 flex flex-row items-stretch`}
         >
-          <div className="p-8">
-            {onClose && (
-              <div
-                className="flex flex-row items-end justify-end text-right cursor-pointer transition-colors text-geocaching-brown-gray hover:text-black text-xl"
-                onClick={() => onClose()}
-              >
-                <FaArrowRight />
-              </div>
-            )}
-            {children && children}
+          <div
+            className={`w-full rounded-lg bg-white m-4 shadow-2xl transition-all`}
+            onClick={(event) => event.preventDefault()}
+          >
+            <div className="p-8">
+              {onClose && (
+                <div
+                  className="mb-4 flex flex-row items-center justify-start text-right cursor-pointer transition-colors text-geocaching-brown-dark hover:text-geocaching-brown-darker text-xl group"
+                  onClick={() => onClose()}
+                >
+                  <FaArrowLeft /> 
+                  <span className="ml-4 font-black transition duration-500 transform translate-x-0 group-hover:-translate-x-2">Zpátky na mapu</span>
+                </div>
+              )}
+              {children && children}
+            </div>
           </div>
         </div>
       </div>
