@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { FaArrowLeft, FaArrowRight, FaMapMarkedAlt, FaSignOutAlt, FaTimes } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 export type OverlayProps = {
   visible: boolean;
@@ -32,7 +32,7 @@ export const Overlay: FC<OverlayProps> = ({ visible, children, onClose }) => {
             <div className="p-8">
               {onClose && (
                 <div
-                  className="mb-4 flex flex-row items-center justify-start text-right cursor-pointer transition-colors text-geocaching-brown-dark hover:text-geocaching-brown-darker text-xl group"
+                  className="mb-4 flex flex-row items-center justify-start text-right cursor-pointer transition-colors text-geocaching-green text-xl group"
                   onClick={() => onClose()}
                 >
                   <FaArrowLeft /> 
