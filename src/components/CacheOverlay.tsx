@@ -33,9 +33,9 @@ export const CacheOverlay: FC<CacheOverlayProps> = ({
               {!cache.locked && <CacheCoordinates coordinates={cache.coordinates} />}
             </div>
           </div>
-          <p className="my-4">
+          <div className="my-4">
             <ReactMarkdown skipHtml={true}>{cache.content}</ReactMarkdown>
-          </p>
+          </div>
           {cache.locked && <LockedMysteryCache cache={cache} loading={false} />}
         </>
       )}

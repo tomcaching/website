@@ -13,12 +13,24 @@ export const unlockCache = async (id: number, solution: string): Promise<Array<C
             "Accept": "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ solution })
+        body: JSON.stringify({ solution: solution.toLowerCase() })
     };
 
-    return await fetch(`${api}/api/caches/unlock/${id}`, payload).then(response => response.json()) as Array<Cache>;
+    return await fetch(`${api}/api/caches/unlock/${id}`, payload).then(response => {
+        if (!response.ok) {
+            throw new Error();
+        };
+
+        return response.json();
+    }) as Array<Cache>;
 };
 
 export const markCacheFound = async (id: number): Promise<Array<Cache>> => {
-    return await fetch(`${api}/api/caches/mark-found/${id}`, { method: "post" }).then(response => response.json()) as Array<Cache>;
+    return await fetch(`${api}/api/caches/mark-found/${id}`, { method: "post" }).then(response => {
+        if (!response.ok) {
+            throw new Error();
+        }
+
+        return response.json();
+    }) as Array<Cache>;
 };

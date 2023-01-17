@@ -20,8 +20,8 @@ export default function Home() {
 
   useEffect(() => data && setCaches(data), [data, setCaches]);
 
-  const selectedCache = cache != null 
-    ? (caches.find(item => item.id == cache) ?? null)
+  const selectedCache = caches != null
+    ? (caches?.find(item => item.id == cache) ?? null)
     : null;
 
   return (
