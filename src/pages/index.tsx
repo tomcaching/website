@@ -21,8 +21,8 @@ export default function Home() {
     <>
       <Head>
         <title>Tomcaching</title>
-        <meta name="description" content="To be done" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="og:image" content="https://i.imgur.com/Qrc2xVn.png" />
         <link rel="shortcut icon" href="/static/favicon.png" />
       </Head>
       <div className="flex flex-col min-h-screen">
