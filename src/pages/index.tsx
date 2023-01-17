@@ -10,7 +10,7 @@ import { CacheOverlay } from "@/components/CacheOverlay";
 
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
-  loading: () => <div className="bg-geocaching-brown-gray flex-grow" />,
+  loading: () => <div className="bg-geocaching-gray flex-grow" />,
 });
 
 export default function Home() {

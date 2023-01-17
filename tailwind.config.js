@@ -10,14 +10,15 @@ module.exports = {
         geocaching: {
           green: "#02874d",
           white: "#ffffff",
+          light: "#e6f7ef",
+          gray: "#c1c1c1",
           brown: {
             darker: "#5f452a",
             dark: "#83603f",
             light: "#f8edd4",
-            gray: "#c1c1c1"
-          }
-        }
-      }
+          },
+        },
+      },
     },
   },
   plugins: [],
