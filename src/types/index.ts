@@ -20,7 +20,7 @@ type TraditionalCache = Base & {
 type MysteryCache = Base & {
   type: "mystery";
   locked: boolean;
-  question: String;
+  question: string;
 };
 
 export type Cache = TraditionalCache | MysteryCache;

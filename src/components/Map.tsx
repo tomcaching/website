@@ -62,7 +62,7 @@ export const Map: FC<MapProps> = ({ caches, loading, onCacheSelected }) => {
       </>
 
       {loading && (
-        <div className="absolute right-4 top-4 z-[10000] bg-white p-4 rounded-lg font-black text-geocaching-brown-darker shadow-lg">
+        <div className="absolute w-full h-full inset-0 flex flex-row items-center justify-center z-[10000] backdrop-brightness-50 backdrop-blur-sm rounded-lg font-black text-geocaching-white shadow-lg text-2xl">
           Načítám kešky...
         </div>
       )}
