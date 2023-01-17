@@ -2,11 +2,12 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { useState } from "react";
-import { type Cache } from "@/types";
+import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import { fetchCaches } from "@/api";
 import { CacheOverlay } from "@/components/CacheOverlay";
+import { ApplicationContext, ApplicationContextState } from "@/context/ApplicationContext";
+import { type Cache } from "@/types";
 
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -14,8 +15,14 @@ const Map = dynamic(() => import("@/components/Map"), {
 });
 
 export default function Home() {
-  const [selectedCache, setSelectedCache] = useState<Cache | null>(null);
-  const { data: caches, isLoading } = useQuery("caches", fetchCaches);
+  const { cache, setCache, caches, setCaches } = useContext<ApplicationContextState>(ApplicationContext);
+  const { data, isLoading } = useQuery<Array<Cache>>("caches", fetchCaches);
+
+  useEffect(() => data && setCaches(data), [data, setCaches]);
+
+  const selectedCache = cache != null 
+    ? (caches.find(item => item.id == cache) ?? null)
+    : null;
 
   return (
     <>
@@ -32,10 +39,10 @@ export default function Home() {
         <Map
           loading={isLoading}
           caches={caches || []}
-          onCacheSelected={(cache) => setSelectedCache(cache)}
+          onCacheSelected={(cache) => setCache(cache.id)}
         />
         <Footer />
-        <CacheOverlay cache={selectedCache} onClose={() => setSelectedCache(null)} />
+        <CacheOverlay cache={selectedCache} onClose={() => setCache(null)} />
       </div>
     </>
   );
