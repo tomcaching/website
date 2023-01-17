@@ -22,6 +22,8 @@ export default function Home() {
       <Head>
         <title>Tomcaching</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="og:title" content="Tomcaching" />
+        <meta name="og:url" content="https://tomcaching.fun" />
         <meta name="og:image" content="https://i.imgur.com/Qrc2xVn.png" />
         <link rel="shortcut icon" href="/static/favicon.png" />
       </Head>
