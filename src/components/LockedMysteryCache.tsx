@@ -28,7 +28,7 @@ export const LockedMysteryCache: FC<LockedMysteryCacheProps> = ({
       <div className="flex flex-row items-center mt-8">
         <input
           ref={inputRef}
-          className="border-2 border-r-0 h-12 p-4 font-semibold tracking-wider border-geocaching-green rounded-l-lg outline-none focus:ring-4 ring-geocaching-green ring-opacity-40 z-50 disabled:bg-geocaching-brown"
+          className="border-2 border-r-0 h-12 p-4 font-semibold tracking-widest text-sm uppercase border-geocaching-green rounded-l-lg outline-none focus:ring-4 ring-geocaching-green ring-opacity-40 z-50 disabled:bg-geocaching-brown"
           placeholder="Heslo"
           disabled={loading}
         />
