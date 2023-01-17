@@ -1,10 +1,10 @@
-import { type Cache } from "@/types";
+import { type MysteryCache } from "@/types";
 import { createRef, type FC } from "react";
 import { FaKey, FaLock, FaSpinner } from "react-icons/fa";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 type LockedMysteryCacheProps = {
-  cache: Cache;
+  cache: MysteryCache;
   loading: boolean;
 };
 
@@ -13,10 +13,6 @@ export const LockedMysteryCache: FC<LockedMysteryCacheProps> = ({
   loading,
 }: LockedMysteryCacheProps) => {
   const inputRef = createRef<HTMLInputElement>();
-
-  if (cache.type != "mystery") {
-    return <></>;
-  }
 
   return (
     <div className="bg-geocaching-light p-4 rounded-lg">

@@ -11,13 +11,13 @@ type Base = {
   found: boolean;
 };
 
-type TraditionalCache = Base & {
+export type TraditionalCache = Base & {
   type: "traditional";
   locked: false;
   question: null;
 };
 
-type MysteryCache = Base & {
+export type MysteryCache = Base & {
   type: "mystery";
   locked: boolean;
   question: string;
