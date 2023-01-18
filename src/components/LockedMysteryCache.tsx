@@ -1,22 +1,36 @@
-import { type Cache } from "@/types";
-import { createRef, type FC } from "react";
+import { unlockCache } from "@/api";
+import { type MysteryCache } from "@/types";
+import { useEffect, useState, type FC } from "react";
 import { FaKey, FaLock, FaSpinner } from "react-icons/fa";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { useMutation, useQueryClient } from "react-query";
 
 type LockedMysteryCacheProps = {
-  cache: Cache;
+  cache: MysteryCache;
   loading: boolean;
 };
 
 export const LockedMysteryCache: FC<LockedMysteryCacheProps> = ({
   cache,
-  loading,
+  loading: loadingProp,
 }: LockedMysteryCacheProps) => {
-  const inputRef = createRef<HTMLInputElement>();
+  const [error, setError] = useState<boolean>(false);
+  const [solution, setSolution] = useState<string>("");
 
-  if (cache.type != "mystery") {
-    return <></>;
-  }
+  const client = useQueryClient();
+  const mutation = useMutation(() => unlockCache(cache.id, solution), {
+    onSuccess: (response) => {
+      client.setQueryData("caches", response);
+      setError(false);
+    },
+    onError: () => {
+      setError(true);
+    }
+  });
+
+  useEffect(() => setError(false), [cache, loadingProp, setError]);
+
+  const loading = loadingProp || mutation.isLoading;
 
   return (
     <div className="bg-geocaching-light p-4 rounded-lg">
@@ -27,15 +41,17 @@ export const LockedMysteryCache: FC<LockedMysteryCacheProps> = ({
       <ReactMarkdown>{cache.question}</ReactMarkdown>
       <div className="flex flex-row items-center mt-8">
         <input
-          ref={inputRef}
+          value={solution}
+          onChange={(event) => { setSolution(event.target.value.trim()); setError(false); }}
           className="border-2 border-r-0 h-12 p-4 font-semibold tracking-widest text-sm uppercase border-geocaching-green rounded-l-lg outline-none focus:ring-4 ring-geocaching-green ring-opacity-40 z-50 disabled:bg-geocaching-brown"
           placeholder="Heslo"
           disabled={loading}
         />
-        <button className="flex flex-row items-center justify-center bg-geocaching-green text-white h-12 w-12 py-4 rounded-r-lg transition-all text-lg outline-none focus:ring-4 ring-geocaching-green ring-opacity-40">
+        <button disabled={loading} onClick={() => mutation.mutate()} className="flex flex-row items-center justify-center bg-geocaching-green text-white h-12 w-12 py-4 rounded-r-lg transition-all text-lg outline-none focus:ring-4 ring-geocaching-green ring-opacity-40">
           {loading ? <FaSpinner className="animate-spin" /> : <FaKey />}
         </button>
       </div>
+      {error && <div className="text-red-700 font-semibold mt-2">To bohužel není správná odpověď...</div>}
     </div>
   );
 };
