@@ -1,7 +1,9 @@
+import { markCacheFound } from "@/api";
 import { type Cache } from "@/types";
 import { type FC } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
+import { useMutation, useQueryClient } from "react-query";
 import { CacheCoordinates } from "./CacheCoordinates";
 import { CacheHint } from "./CacheHint";
 import { LockedMysteryCache } from "./LockedMysteryCache";
@@ -16,6 +18,11 @@ export const CacheOverlay: FC<CacheOverlayProps> = ({
   cache,
   onClose,
 }: CacheOverlayProps) => {
+  const client = useQueryClient();
+  const mutation = useMutation(() => markCacheFound(cache!.id), {
+    onSuccess: () => client.invalidateQueries("caches")
+  });
+
   return (
     <Overlay visible={cache !== null} onClose={onClose}>
       {cache && (
@@ -28,6 +35,9 @@ export const CacheOverlay: FC<CacheOverlayProps> = ({
                   <FaCheckCircle className="mr-1" />
                   Nalezena
                 </div>
+              )}
+              {(!cache.found && !cache.locked) && (
+                <button className="bg-geocaching-green text-white text-sm uppercase px-6 py-4 rounded-lg mt-4" onClick={() => mutation.mutate()}>Označit kešku za nalezenou</button>
               )}
             </h1>
             <div>
