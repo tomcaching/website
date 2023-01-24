@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import { CacheCoordinates } from "./CacheCoordinates";
+import { CacheHint } from "./CacheHint";
 import { LockedMysteryCache } from "./LockedMysteryCache";
 import { Overlay } from "./Overlay";
 
@@ -36,7 +37,11 @@ export const CacheOverlay: FC<CacheOverlayProps> = ({
           <div className="my-4">
             <ReactMarkdown skipHtml={true}>{cache.content}</ReactMarkdown>
           </div>
-          {cache.locked && <LockedMysteryCache cache={cache} loading={false} />}
+          {
+            cache.locked
+              ? <LockedMysteryCache cache={cache} loading={false} />
+              : <CacheHint hint={cache.hint} />
+          }
         </>
       )}
     </Overlay>

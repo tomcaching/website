@@ -8,6 +8,7 @@ type Base = {
   coordinates: CacheCoordinates;
   title: string;
   content: string;
+  hint: string;
   found: boolean;
 };
 

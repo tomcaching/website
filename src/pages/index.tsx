@@ -11,7 +11,7 @@ import { type Cache } from "@/types";
 
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
-  loading: () => <div className="bg-geocaching-gray flex-grow" />,
+  loading: () => <div className="bg-geocaching-gray-default flex-grow" />,
 });
 
 export default function Home() {
