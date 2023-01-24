@@ -4,7 +4,7 @@ import { type Cache } from "@/types";
 import "leaflet/dist/leaflet.css";
 import { icon, Point } from "leaflet";
 
-const zoom = 16;
+const zoom = 14;
 const position = {
   lat: 50.774810966592305,
   lng: 15.048286893177636,
