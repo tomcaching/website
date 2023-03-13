@@ -1,7 +1,7 @@
 import { unlockCache } from "@/api";
 import { type MysteryCache } from "@/types";
 import { useEffect, useState, type FC } from "react";
-import { FaKey, FaLock, FaSpinner } from "react-icons/fa";
+import { FaFlag, FaKey, FaLock, FaSpinner } from "react-icons/fa";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { useMutation, useQueryClient } from "react-query";
 
@@ -38,8 +38,8 @@ export const LockedMysteryCache: FC<LockedMysteryCacheProps> = ({
         <FaLock className="mr-2" />
         <span className="font-bold">Souřadnice je potřeba odemknout</span>
       </div>
-      <ReactMarkdown>{cache.question}</ReactMarkdown>
-      <div className="flex flex-row items-center mt-8">
+      { cache.challenge === null && <ReactMarkdown>{cache.question}</ReactMarkdown> }
+      <div className="flex flex-row items-center mt-4">
         <input
           value={solution}
           onChange={(event) => { setSolution(event.target.value.trim()); setError(false); }}

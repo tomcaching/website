@@ -1,7 +1,7 @@
 import { markCacheFound } from "@/api";
 import { type Cache } from "@/types";
 import { type FC } from "react";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaFlag } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import { useMutation, useQueryClient } from "react-query";
 import { CacheCoordinates } from "./CacheCoordinates";
@@ -45,7 +45,11 @@ export const CacheOverlay: FC<CacheOverlayProps> = ({
             </div>
           </div>
           <div className="my-4">
-            <ReactMarkdown skipHtml={true}>{cache.content}</ReactMarkdown>
+            {
+              cache.challenge !== null 
+                ? <a href={cache.challenge} target="_blank" rel="noreferrer" className="inline-flex flex-row items-center justify-center gap-4 bg-geocaching-green text-white text-sm uppercase px-6 py-4 rounded-lg mt-4 font-black"><FaFlag/> Odkaz na úkol, který je potřeba vyřešit</a>
+                : <ReactMarkdown skipHtml={true}>{cache.content}</ReactMarkdown>
+            }
           </div>
           {
             cache.locked
