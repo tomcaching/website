@@ -38,7 +38,7 @@ export const LockedMysteryCache: FC<LockedMysteryCacheProps> = ({
         <FaLock className="mr-2" />
         <span className="font-bold">Souřadnice je potřeba odemknout</span>
       </div>
-      { cache.challenge === null && <ReactMarkdown>{cache.question}</ReactMarkdown> }
+      { (cache.challenge === null || cache.challenge === "") && <ReactMarkdown>{cache.question}</ReactMarkdown> }
       <div className="flex flex-row items-center mt-4">
         <input
           value={solution}
