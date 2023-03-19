@@ -46,7 +46,7 @@ export const CacheOverlay: FC<CacheOverlayProps> = ({
           </div>
           <div className="my-4">
             {
-              cache.challenge !== null 
+              cache.challenge !== null && cache.challenge !== ""
                 ? <a href={cache.challenge} target="_blank" rel="noreferrer" className="inline-flex flex-row items-center justify-center gap-4 bg-geocaching-green text-white text-sm uppercase px-6 py-4 rounded-lg mt-4 font-black"><FaFlag/> Odkaz na úkol, který je potřeba vyřešit</a>
                 : <ReactMarkdown skipHtml={true}>{cache.content}</ReactMarkdown>
             }
