@@ -6,7 +6,7 @@ const formatCoordinates = (value: number, prefix: string) => {
   const base = Math.floor(value);
   const decimal = value.toFixed(6).replace(/\d+\./, "");
 
-  return `${prefix} ${base}°${decimal.substring(0, 2)}.${decimal.substring(2, 5)}`;
+  return `${prefix} ${base}.${decimal}`;
 };
 
 export type CacheCoordinatesProps = {
