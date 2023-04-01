@@ -8,6 +8,7 @@ import { fetchCaches } from "@/api";
 import { CacheOverlay } from "@/components/CacheOverlay";
 import { ApplicationContext, ApplicationContextState } from "@/context/ApplicationContext";
 import { type Cache } from "@/types";
+import { useRouter } from "next/router";
 
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -15,10 +16,33 @@ const Map = dynamic(() => import("@/components/Map"), {
 });
 
 export default function Home() {
+  const router = useRouter();
   const { cache, setCache, caches, setCaches } = useContext<ApplicationContextState>(ApplicationContext);
   const { data, isLoading } = useQuery<Array<Cache>>("caches", fetchCaches);
 
   useEffect(() => data && setCaches(data), [data, setCaches]);
+  useEffect(() => { 
+    const currentRouterCache = router.query.cache ?? null;
+    
+    if (cache === null && currentRouterCache === null) {
+      setCache(null);
+      return;
+    }
+
+    const currentRouterCacheId = Number(currentRouterCache);
+
+    if (cache !== currentRouterCacheId) {
+      setCache(currentRouterCacheId);
+    }
+  }, [cache, setCache, router.query]);
+
+  const selectCache = async (cache: number | null) => {
+    const query = cache === null ? {} : { cache };
+    const route = { query };
+
+    await router.push(route, undefined, { shallow: true });
+    await setCache(cache);
+  }
 
   const selectedCache = caches != null
     ? (caches?.find(item => item.id == cache) ?? null)
@@ -39,10 +63,10 @@ export default function Home() {
         <Map
           loading={isLoading}
           caches={caches || []}
-          onCacheSelected={(cache) => setCache(cache.id)}
+          onCacheSelected={(cache) => selectCache(cache.id)}
         />
         <Footer />
-        <CacheOverlay cache={selectedCache} onClose={() => setCache(null)} />
+        <CacheOverlay cache={selectedCache} onClose={() => selectCache(null)} />
       </div>
     </>
   );
