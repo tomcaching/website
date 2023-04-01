@@ -26,7 +26,7 @@ export const Overlay: FC<OverlayProps> = ({ visible, children, onClose }) => {
         ref={backgroundRef}
       >
         <div
-          className={`${foregroundVisibilityClass} z-[10001] w-full md:w-3/4 xl:w-1/2 h-screen transition-all duration-700 flex flex-row items-stretch`}
+          className={`${foregroundVisibilityClass} z-[10001] w-full md:w-3/4 xl:w-1/2 min-h-screen transition-all duration-700 flex flex-row items-stretch`}
         >
           <div
             className={`w-full rounded-lg bg-white m-4 shadow-2xl transition-all`}
