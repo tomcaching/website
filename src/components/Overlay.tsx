@@ -29,12 +29,12 @@ export const Overlay: FC<OverlayProps> = ({ visible, children, onClose }) => {
           className={`${foregroundVisibilityClass} z-[10001] w-full md:w-3/4 xl:w-1/2 min-h-screen transition-all duration-700 flex flex-row items-stretch`}
         >
           <div
-            className={`w-full rounded-lg bg-white m-4 shadow-2xl transition-all`}
+            className={`w-full rounded-lg bg-white md:m-4 shadow-2xl transition-all`}
           >
-            <div className="p-8">
+            <div className="p-4 md:p-8">
               {onClose && (
                 <div
-                  className="mb-4 flex flex-row items-center justify-start text-right cursor-pointer transition-colors text-geocaching-green text-xl group"
+                  className="mb-4 flex flex-row items-center justify-center md:justify-start text-right cursor-pointer transition-colors text-geocaching-green text-md md:text-xl group"
                   onClick={() => onClose()}
                 >
                   <FaArrowLeft />
